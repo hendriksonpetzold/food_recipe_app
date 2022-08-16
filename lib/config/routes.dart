@@ -5,6 +5,6 @@ import 'package:get/get.dart';
 class Routes {
   static final List<GetPage> routes = [
     GetPage(name: '/', page: () => const OnBoardingPage()),
-    GetPage(name: '/home_page', page: () => const HomePage()),
+    GetPage(name: '/home_page', page: () => HomePage()),
   ];
 }

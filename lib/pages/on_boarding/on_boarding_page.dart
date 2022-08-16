@@ -46,6 +46,8 @@ class OnBoardingPage extends StatelessWidget {
                 ),
                 Expanded(child: Container()),
                 AppButton(
+                  circularBorder: 30,
+                  isSelected: RxBool(true),
                   label: 'Iniciar',
                   onTap: () {
                     Get.toNamed('/home_page');
