@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/pages/home/components/home_recipe_card.dart';
+
 import 'package:food_recipe_app/pages/home/components/home_recipe_list_view.dart';
 import 'package:food_recipe_app/pages/home/components/home_search_form_field.dart';
 import 'package:food_recipe_app/pages/home/components/home_select_recipe_type.dart';
@@ -17,7 +17,11 @@ class HomePage extends StatelessWidget {
       backgroundColor: AppColors.backGroundColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.only(
+            top: 24,
+            left: 24,
+            right: 24,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

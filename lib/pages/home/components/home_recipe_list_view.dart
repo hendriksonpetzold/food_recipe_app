@@ -14,7 +14,7 @@ class HomeRecipeListView extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {},
-                child: HomeRecipeCard(),
+                child: const HomeRecipeCard(),
               ),
               const SizedBox(
                 height: 8,

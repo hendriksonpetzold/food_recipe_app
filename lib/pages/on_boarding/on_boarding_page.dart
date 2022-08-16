@@ -50,7 +50,7 @@ class OnBoardingPage extends StatelessWidget {
                   isSelected: RxBool(true),
                   label: 'Iniciar',
                   onTap: () {
-                    Get.toNamed('/home_page');
+                    Get.toNamed('/initial_page');
                   },
                 ),
               ],
