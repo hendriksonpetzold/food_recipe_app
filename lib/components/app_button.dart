@@ -37,7 +37,7 @@ class AppButton extends StatelessWidget {
           child: Text(
             label,
             style: TextStyle(
-              color: isSelected.value ? Colors.white : Colors.black,
+              color: isSelected.value ? Colors.white : AppColors.textColor,
               fontWeight: FontWeight.bold,
               fontSize: 16,
             ),

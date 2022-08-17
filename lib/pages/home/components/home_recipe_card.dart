@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/components/favorite_button.dart';
+import 'package:food_recipe_app/style/app_colors.dart';
 
 class HomeRecipeCard extends StatelessWidget {
   const HomeRecipeCard({Key? key}) : super(key: key);
@@ -23,6 +24,7 @@ class HomeRecipeCard extends StatelessWidget {
           Text(
             'Nome da receita',
             style: TextStyle(
+              color: AppColors.textColor,
               fontWeight: FontWeight.w600,
             ),
           ),

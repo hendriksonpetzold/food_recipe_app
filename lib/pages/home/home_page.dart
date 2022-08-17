@@ -30,6 +30,7 @@ class HomePage extends StatelessWidget {
                 style: GoogleFonts.montserrat(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
+                  color: AppColors.textColor,
                 ),
               ),
               const SizedBox(
@@ -44,6 +45,7 @@ class HomePage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
+                  color: AppColors.textColor,
                 ),
               ),
               const SizedBox(
