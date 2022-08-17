@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/pages/recipe_detail/components/ingridients_list_view.dart';
+import 'package:food_recipe_app/pages/recipe_detail/recipe_detail_controller.dart';
 import 'package:food_recipe_app/style/app_colors.dart';
 import 'package:get/get.dart';
 
 class RecipeDetailPage extends StatelessWidget {
-  const RecipeDetailPage({Key? key}) : super(key: key);
+  RecipeDetailPage({Key? key}) : super(key: key);
+
+  final RecipeDetailController controller = Get.put(RecipeDetailController());
 
   @override
   Widget build(BuildContext context) {
@@ -22,20 +25,20 @@ class RecipeDetailPage extends StatelessWidget {
           ),
           centerTitle: true,
           backgroundColor: AppColors.backGroundColor,
-          title: const Text(
-            'Nome da receita',
-            style: TextStyle(
+          title: Text(
+            controller.recipeName,
+            style: const TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
         body: Column(
-          children: const [
-            SizedBox(
+          children: [
+            const SizedBox(
               height: 16,
             ),
-            TabBar(
+            const TabBar(
               indicatorColor: AppColors.accentColor,
               tabs: [
                 Text(
@@ -57,11 +60,15 @@ class RecipeDetailPage extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  IngridientsListView(),
-                  Center(
+                  const IngridientsListView(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'Page2',
-                      style: TextStyle(color: Colors.black),
+                      controller.preparationMode,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                 ],

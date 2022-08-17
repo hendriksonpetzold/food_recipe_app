@@ -12,7 +12,7 @@ class Routes {
       children: [
         GetPage(
           name: '/recipe_detail_page',
-          page: () => const RecipeDetailPage(),
+          page: () => RecipeDetailPage(),
         ),
       ],
     ),

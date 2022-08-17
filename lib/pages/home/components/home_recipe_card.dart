@@ -3,7 +3,11 @@ import 'package:food_recipe_app/components/favorite_button.dart';
 import 'package:food_recipe_app/style/app_colors.dart';
 
 class HomeRecipeCard extends StatelessWidget {
-  const HomeRecipeCard({Key? key}) : super(key: key);
+  final String recipeName;
+  const HomeRecipeCard({
+    Key? key,
+    required this.recipeName,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +24,15 @@ class HomeRecipeCard extends StatelessWidget {
           color: Colors.white, borderRadius: BorderRadius.circular(10)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
+        children: [
           Text(
-            'Nome da receita',
-            style: TextStyle(
+            recipeName,
+            style: const TextStyle(
               color: AppColors.textColor,
               fontWeight: FontWeight.w600,
             ),
           ),
-          FavoriteButton(),
+          const FavoriteButton(),
         ],
       ),
     );
