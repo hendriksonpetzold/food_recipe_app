@@ -20,7 +20,7 @@ class ProfilePage extends StatelessWidget {
           'Perfil',
           style: TextStyle(
             color: AppColors.textColor,
-            fontSize: 20,
+            fontSize: 22,
             fontWeight: FontWeight.bold,
           ),
         ),
