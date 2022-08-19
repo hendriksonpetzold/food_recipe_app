@@ -22,7 +22,7 @@ class InitialPage extends StatelessWidget {
               HomePage(),
               const FavoritePage(),
               const MyRecipesPage(),
-              const ProfilePage(),
+              ProfilePage(),
             ],
           );
         },
