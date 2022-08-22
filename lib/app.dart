@@ -9,7 +9,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Recipe Food',
+      title: 'Receita na mão',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: GoogleFonts.montserratTextTheme(),
