@@ -13,6 +13,7 @@ class HomeRecipeListView extends GetView<HomeController> {
         itemCount: controller.recipe.length,
         itemBuilder: (context, index) {
           final list = controller.recipe[index];
+          RxBool isFavorite = RxBool(false);
           return Column(
             children: [
               GestureDetector(
@@ -28,6 +29,13 @@ class HomeRecipeListView extends GetView<HomeController> {
                 },
                 child: HomeRecipeCard(
                   recipeName: list.recipeName,
+                  isFavorite: isFavorite,
+                  onFavoriteButtonTap: () {
+                    controller.onFavoriteButtonTap(
+                      isFavorite: isFavorite,
+                      index: index,
+                    );
+                  },
                 ),
               ),
               const SizedBox(

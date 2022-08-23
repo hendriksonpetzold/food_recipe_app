@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/components/favorite_button.dart';
+import 'package:food_recipe_app/pages/home/components/favorite_button.dart';
 import 'package:food_recipe_app/style/app_colors.dart';
+import 'package:get/get.dart';
 
 class HomeRecipeCard extends StatelessWidget {
   final String recipeName;
+  final RxBool isFavorite;
+  final void Function()? onFavoriteButtonTap;
   const HomeRecipeCard({
     Key? key,
     required this.recipeName,
+    required this.isFavorite,
+    required this.onFavoriteButtonTap,
   }) : super(key: key);
 
   @override
@@ -32,7 +37,10 @@ class HomeRecipeCard extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          const FavoriteButton(),
+          FavoriteButton(
+            isFavorite: isFavorite,
+            onFavoriteButtonTap: onFavoriteButtonTap,
+          ),
         ],
       ),
     );

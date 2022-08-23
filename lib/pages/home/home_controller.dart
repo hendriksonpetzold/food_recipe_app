@@ -2,11 +2,36 @@ import 'package:flutter/cupertino.dart';
 import 'package:food_recipe_app/enums/recipe_type_enum.dart';
 import 'package:food_recipe_app/models/recipe_model.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 
 class HomeController extends GetxController {
   final TextEditingController searchEditingController = TextEditingController();
   final Rx<RecipeTypeEnum> _activeList = Rx<RecipeTypeEnum>(RecipeTypeEnum.all);
+  late Box<RecipeModel> recipeBox;
   RecipeTypeEnum get activeList => _activeList.value;
+  RxList<RecipeModel> favorite = RxList([]);
+
+  @override
+  void onInit() {
+    recipeBox = Hive.box('favorite_recipes');
+    print('Recipes: ${recipeBox.values}');
+    super.onInit();
+  }
+
+  void onFavoriteButtonTap({required RxBool isFavorite, required int index}) {
+    isFavorite.value = !isFavorite.value;
+    final list = recipe[index];
+    if (isFavorite.value == true) {
+      recipeBox.add(
+        RecipeModel(
+          recipeName: list.recipeName,
+          preparationMode: list.preparationMode,
+          ingridients: list.ingridients,
+        ),
+      );
+    }
+  }
+
   void changeList({required RecipeTypeEnum list}) {
     _activeList.value = list;
   }
