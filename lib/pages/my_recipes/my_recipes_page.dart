@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/models/recipe_model.dart';
+import 'package:food_recipe_app/pages/home/components/home_recipe_card.dart';
+import 'package:food_recipe_app/pages/my_recipes/my_recipes_controller.dart';
 import 'package:food_recipe_app/style/app_colors.dart';
+import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class MyRecipesPage extends StatelessWidget {
-  const MyRecipesPage({Key? key}) : super(key: key);
-
+  MyRecipesPage({Key? key}) : super(key: key);
+  final MyRecipesController controller = Get.put(MyRecipesController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,10 +27,40 @@ class MyRecipesPage extends StatelessWidget {
         automaticallyImplyLeading: false,
         elevation: 0,
       ),
-      body: Container(),
+      body: ValueListenableBuilder(
+        valueListenable: controller.myRecipesBox.listenable(),
+        builder: (context, Box<RecipeModel> box, _) {
+          List<RecipeModel> recipe = box.values.toList().cast<RecipeModel>();
+          return ListView.builder(
+            itemCount: recipe.length,
+            itemBuilder: (context, index) {
+              final list = recipe[index];
+              return GestureDetector(
+                onTap: () {
+                  Get.toNamed(
+                    '/initial_page/recipe_detail_page',
+                    arguments: {
+                      'recipe_name': list.recipeName,
+                      'ingridients': list.ingridients,
+                      'preparation_mode': list.preparationMode,
+                    },
+                  );
+                },
+                child: HomeRecipeCard(
+                  recipeName: list.recipeName,
+                  isFavorite: RxBool(false),
+                  onFavoriteButtonTap: () {},
+                ),
+              );
+            },
+          );
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.accentColor,
-        onPressed: () {},
+        onPressed: () {
+          Get.toNamed('/initial_page/create_my_recipes_page');
+        },
         child: const Icon(
           Icons.add,
         ),

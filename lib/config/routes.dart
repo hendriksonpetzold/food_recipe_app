@@ -1,3 +1,4 @@
+import 'package:food_recipe_app/pages/create_my_recipes/create_my_recipes_page.dart';
 import 'package:food_recipe_app/pages/initial/initial_page.dart';
 import 'package:food_recipe_app/pages/on_boarding/on_boarding_page.dart';
 import 'package:food_recipe_app/pages/recipe_detail/recipe_detail_page.dart';
@@ -13,6 +14,10 @@ class Routes {
         GetPage(
           name: '/recipe_detail_page',
           page: () => RecipeDetailPage(),
+        ),
+        GetPage(
+          name: '/create_my_recipes_page',
+          page: () => CreateMyRecipesPage(),
         ),
       ],
     ),

@@ -20,8 +20,8 @@ class InitialPage extends StatelessWidget {
             index: controller.getPageIndex(),
             children: [
               HomePage(),
-              const FavoritePage(),
-              const MyRecipesPage(),
+              FavoritePage(),
+              MyRecipesPage(),
               ProfilePage(),
             ],
           );

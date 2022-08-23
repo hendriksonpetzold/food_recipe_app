@@ -25,7 +25,7 @@ class OnBoardingPage extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.only(
-              bottom: 32,
+              bottom: 24,
             ),
             width: MediaQuery.of(context).size.width * .65,
             height: MediaQuery.of(context).size.height * .3,

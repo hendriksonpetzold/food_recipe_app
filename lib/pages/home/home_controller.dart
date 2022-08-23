@@ -9,12 +9,11 @@ class HomeController extends GetxController {
   final Rx<RecipeTypeEnum> _activeList = Rx<RecipeTypeEnum>(RecipeTypeEnum.all);
   late Box<RecipeModel> recipeBox;
   RecipeTypeEnum get activeList => _activeList.value;
-  RxList<RecipeModel> favorite = RxList([]);
 
   @override
   void onInit() {
-    recipeBox = Hive.box('favorite_recipes');
-    print('Recipes: ${recipeBox.values}');
+    recipeBox = Hive.box('favorite');
+
     super.onInit();
   }
 
@@ -22,13 +21,23 @@ class HomeController extends GetxController {
     isFavorite.value = !isFavorite.value;
     final list = recipe[index];
     if (isFavorite.value == true) {
-      recipeBox.add(
+      recipeBox.put(
+        list.id,
         RecipeModel(
           recipeName: list.recipeName,
           preparationMode: list.preparationMode,
           ingridients: list.ingridients,
+          id: list.id,
+          isFavorite: list.isFavorite,
+          rating: list.rating,
+          preparationTime: list.preparationTime,
+          category: list.category,
+          createdAt: list.createdAt,
+          description: list.description,
         ),
       );
+    } else {
+      recipeBox.delete(list.id);
     }
   }
 
@@ -85,6 +94,13 @@ class HomeController extends GetxController {
         'Cravo',
         'Raspas de 1 laranja',
       ],
+      id: 0,
+      isFavorite: false,
+      rating: 0,
+      preparationTime: 0,
+      category: [],
+      createdAt: 0,
+      description: '',
     ),
     RecipeModel(
       recipeName: 'Bolo de laranja da vovó',
@@ -103,6 +119,13 @@ class HomeController extends GetxController {
         '2 xícaras de suco de laranja',
         '4 ovos',
       ],
+      id: 1,
+      isFavorite: false,
+      rating: 0,
+      preparationTime: 0,
+      category: [],
+      createdAt: 0,
+      description: '',
     ),
     RecipeModel(
       recipeName: 'Creme de milho',
@@ -121,6 +144,13 @@ class HomeController extends GetxController {
         'Sal',
         'Pimenta',
       ],
+      id: 2,
+      isFavorite: false,
+      rating: 0,
+      preparationTime: 0,
+      category: [],
+      createdAt: 0,
+      description: '',
     ),
     RecipeModel(
       recipeName: 'Maçã do amor',
@@ -142,6 +172,13 @@ class HomeController extends GetxController {
         '1/2 colher de café de canela em pó',
         '1 pitada de cravo em pó',
       ],
+      id: 3,
+      isFavorite: false,
+      rating: 0,
+      preparationTime: 0,
+      category: [],
+      createdAt: 0,
+      description: '',
     ),
     RecipeModel(
       recipeName: 'Caldo de feijão',
@@ -165,6 +202,13 @@ class HomeController extends GetxController {
         'Sal e pimenta a gosto',
         '1 litro de água',
       ],
+      id: 4,
+      isFavorite: false,
+      rating: 0,
+      preparationTime: 0,
+      category: [],
+      createdAt: 0,
+      description: '',
     ),
   ];
 }

@@ -7,6 +7,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(RecipeModelAdapter());
-  await Hive.openBox<RecipeModel>('favorite_recipes');
+  await Hive.openBox<RecipeModel>('favorite');
+  await Hive.openBox<RecipeModel>('my_recipes');
   runApp(const App());
 }
