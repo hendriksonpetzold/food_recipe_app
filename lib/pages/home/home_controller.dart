@@ -7,38 +7,14 @@ import 'package:hive/hive.dart';
 class HomeController extends GetxController {
   final TextEditingController searchEditingController = TextEditingController();
   final Rx<RecipeTypeEnum> _activeList = Rx<RecipeTypeEnum>(RecipeTypeEnum.all);
-  late Box<RecipeModel> recipeBox;
   RecipeTypeEnum get activeList => _activeList.value;
+  late Box<RecipeModel> recipeBox;
 
   @override
   void onInit() {
     recipeBox = Hive.box('favorite');
 
     super.onInit();
-  }
-
-  void onFavoriteButtonTap({required RxBool isFavorite, required int index}) {
-    isFavorite.value = !isFavorite.value;
-    final list = recipe[index];
-    if (isFavorite.value == true) {
-      recipeBox.put(
-        list.id,
-        RecipeModel(
-          recipeName: list.recipeName,
-          preparationMode: list.preparationMode,
-          ingridients: list.ingridients,
-          id: list.id,
-          isFavorite: list.isFavorite,
-          rating: list.rating,
-          preparationTime: list.preparationTime,
-          category: list.category,
-          createdAt: list.createdAt,
-          description: list.description,
-        ),
-      );
-    } else {
-      recipeBox.delete(list.id);
-    }
   }
 
   void changeList({required RecipeTypeEnum list}) {

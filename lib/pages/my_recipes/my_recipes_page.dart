@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/models/recipe_model.dart';
-import 'package:food_recipe_app/pages/home/components/home_recipe_card.dart';
+import 'package:food_recipe_app/components/recipe_card.dart';
 import 'package:food_recipe_app/pages/my_recipes/my_recipes_controller.dart';
 import 'package:food_recipe_app/style/app_colors.dart';
 import 'package:get/get.dart';
@@ -46,10 +46,8 @@ class MyRecipesPage extends StatelessWidget {
                     },
                   );
                 },
-                child: HomeRecipeCard(
+                child: RecipeCard(
                   recipeName: list.recipeName,
-                  isFavorite: RxBool(false),
-                  onFavoriteButtonTap: () {},
                 ),
               );
             },

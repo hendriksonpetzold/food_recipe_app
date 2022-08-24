@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/pages/home/components/home_recipe_card.dart';
+import 'package:food_recipe_app/components/recipe_card.dart';
 import 'package:food_recipe_app/pages/home/home_controller.dart';
 import 'package:get/get.dart';
 
@@ -13,29 +13,26 @@ class HomeRecipeListView extends GetView<HomeController> {
         itemCount: controller.recipe.length,
         itemBuilder: (context, index) {
           final list = controller.recipe[index];
-          RxBool isFavorite = RxBool(false);
+
           return Column(
             children: [
               GestureDetector(
-                onTap: () {
-                  Get.toNamed(
+                onTap: () async {
+                  final box = controller.recipeBox.get(list.id);
+
+                  await Get.toNamed(
                     '/initial_page/recipe_detail_page',
                     arguments: {
                       'recipe_name': list.recipeName,
                       'ingridients': list.ingridients,
                       'preparation_mode': list.preparationMode,
+                      'is_favorite': box?.isFavorite ?? false,
+                      'id': list.id,
                     },
                   );
                 },
-                child: HomeRecipeCard(
+                child: RecipeCard(
                   recipeName: list.recipeName,
-                  isFavorite: isFavorite,
-                  onFavoriteButtonTap: () {
-                    controller.onFavoriteButtonTap(
-                      isFavorite: isFavorite,
-                      index: index,
-                    );
-                  },
                 ),
               ),
               const SizedBox(
