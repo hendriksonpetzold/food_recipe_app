@@ -17,10 +17,10 @@ class HomeRecipeListView extends GetView<HomeController> {
           return Column(
             children: [
               GestureDetector(
-                onTap: () async {
+                onTap: () {
                   final box = controller.recipeBox.get(list.id);
 
-                  await Get.toNamed(
+                  Get.toNamed(
                     '/initial_page/recipe_detail_page',
                     arguments: {
                       'recipe_name': list.recipeName,

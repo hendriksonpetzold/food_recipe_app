@@ -36,21 +36,29 @@ class FavoritePage extends StatelessWidget {
             itemCount: recipe.length,
             itemBuilder: (context, index) {
               final list = recipe[index];
-              return GestureDetector(
-                onTap: () {
-                  Get.toNamed(
-                    '/initial_page/recipe_detail_page',
-                    arguments: {
-                      'recipe_name': list.recipeName,
-                      'ingridients': list.ingridients,
-                      'preparation_mode': list.preparationMode,
-                      'is_favorite': list.isFavorite,
+              return Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Get.toNamed(
+                        '/initial_page/recipe_detail_page',
+                        arguments: {
+                          'recipe_name': list.recipeName,
+                          'ingridients': list.ingridients,
+                          'preparation_mode': list.preparationMode,
+                          'is_favorite': list.isFavorite,
+                          'id': list.id,
+                        },
+                      );
                     },
-                  );
-                },
-                child: RecipeCard(
-                  recipeName: list.recipeName,
-                ),
+                    child: RecipeCard(
+                      recipeName: list.recipeName,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                ],
               );
             },
           );

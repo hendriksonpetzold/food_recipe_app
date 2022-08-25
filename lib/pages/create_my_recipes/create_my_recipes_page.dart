@@ -15,8 +15,22 @@ class CreateMyRecipesPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.backGroundColor,
       appBar: AppBar(
-        title: const Text('Crie a sua receita'),
+        title: const Text(
+          'Crie a sua receita',
+          style: TextStyle(
+            color: AppColors.textColor,
+          ),
+        ),
+        leading: BackButton(
+          color: AppColors.textColor,
+          onPressed: () {
+            Get.back();
+          },
+        ),
+        automaticallyImplyLeading: false,
         centerTitle: true,
+        backgroundColor: AppColors.backGroundColor,
+        elevation: 0,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -66,15 +80,17 @@ class CreateMyRecipesPage extends StatelessWidget {
                 controller: controller.categoryEditingController,
               ),
               const SizedBox(
-                height: 8,
+                height: 16,
               ),
               AppButton(
                 label: 'Criar receita',
                 onTap: () {
                   controller.onCreateRecipeButtonTap();
+                  Get.back();
                 },
                 isSelected: RxBool(true),
-                circularBorder: 30,
+                circularBorder: 20,
+                margin: EdgeInsets.zero,
               )
             ],
           ),

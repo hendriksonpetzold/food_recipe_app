@@ -19,7 +19,7 @@ class CustomBottomNavigationBarIcon extends StatelessWidget {
       onTap: onTap,
       child: Icon(
         icon,
-        size: 32,
+        size: 28,
         color: isSelected.value ? AppColors.accentColor : Colors.grey,
       ),
     );

@@ -23,7 +23,6 @@ class FavoriteButton extends StatelessWidget {
             width: 30,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
             ),
             child: isFavorite.value
                 ? const Icon(

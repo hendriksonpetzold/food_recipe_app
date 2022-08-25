@@ -28,7 +28,7 @@ class CreateMyRecipesController extends GetxController {
         id: 2,
         recipeName: nameEditingController.text,
         preparationMode: preparationModeEditingController.text,
-        ingridients: [],
+        ingridients: ingredientsEditingController.text.split(','),
         category: [],
         description: descriptionEditingController.text,
         preparationTime: double.parse(preparationTimeEditingController.text),
