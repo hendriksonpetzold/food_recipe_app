@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:food_recipe_app/enums/recipe_type_enum.dart';
+import 'package:food_recipe_app/models/category_model.dart';
 import 'package:food_recipe_app/models/recipe_model.dart';
+import 'package:food_recipe_app/repository/category_repository.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
@@ -9,12 +11,20 @@ class HomeController extends GetxController {
   final Rx<RecipeTypeEnum> _activeList = Rx<RecipeTypeEnum>(RecipeTypeEnum.all);
   RecipeTypeEnum get activeList => _activeList.value;
   late Box<RecipeModel> recipeBox;
+  CategoryRepository categoryRepository = CategoryRepository();
+  List<CategoryModel> category = [];
 
   @override
   void onInit() {
     recipeBox = Hive.box('favorite');
-
+    fetchCategory();
+    print(fetchCategory());
     super.onInit();
+  }
+
+  Future<void> fetchCategory() async {
+    category = await categoryRepository.findAll();
+    print(category);
   }
 
   void changeList({required RecipeTypeEnum list}) {
