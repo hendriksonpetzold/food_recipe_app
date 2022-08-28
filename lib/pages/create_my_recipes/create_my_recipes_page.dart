@@ -33,66 +33,80 @@ class CreateMyRecipesPage extends StatelessWidget {
         elevation: 0,
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 24, right: 24),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 8,
-              ),
-              CreateMyRecipesTextFormField(
-                label: 'Nome da receita',
-                controller: controller.nameEditingController,
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              CreateMyRecipesTextFormField(
-                label: 'Ingredientes',
-                controller: controller.ingredientsEditingController,
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              CreateMyRecipesTextFormField(
-                label: 'Descrição',
-                controller: controller.descriptionEditingController,
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              CreateMyRecipesTextFormField(
-                label: 'Modo de preparo',
-                controller: controller.preparationModeEditingController,
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              CreateMyRecipesTextFormField(
-                label: 'Tempo para preparo',
-                controller: controller.preparationTimeEditingController,
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              CreateMyRecipesTextFormField(
-                label: 'Categoria',
-                controller: controller.categoryEditingController,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              AppButton(
-                label: 'Criar receita',
-                onTap: () {
-                  controller.onCreateRecipeButtonTap();
-                  Get.back();
-                },
-                isSelected: RxBool(true),
-                circularBorder: 20,
-                margin: EdgeInsets.zero,
-              )
-            ],
+        child: Form(
+          key: controller.formKey,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 24, right: 24),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 8,
+                ),
+                CreateMyRecipesTextFormField(
+                  label: 'Nome da receita',
+                  controller: controller.nameEditingController,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                CreateMyRecipesTextFormField(
+                  label: 'Ingredientes',
+                  controller: controller.ingredientsEditingController,
+                  suffix: IconButton(
+                    onPressed: () {
+                      controller.ingridients
+                          .add(controller.ingredientsEditingController.text);
+                      controller.formKey.currentState!.reset();
+                    },
+                    icon: const Icon(
+                      Icons.add,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                CreateMyRecipesTextFormField(
+                  label: 'Descrição',
+                  controller: controller.descriptionEditingController,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                CreateMyRecipesTextFormField(
+                  label: 'Modo de preparo',
+                  controller: controller.preparationModeEditingController,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                CreateMyRecipesTextFormField(
+                  label: 'Tempo para preparo',
+                  controller: controller.preparationTimeEditingController,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                CreateMyRecipesTextFormField(
+                  label: 'Categoria',
+                  controller: controller.categoryEditingController,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                AppButton(
+                  label: 'Criar receita',
+                  onTap: () {
+                    controller.onCreateRecipeButtonTap();
+                    Get.back();
+                  },
+                  isSelected: RxBool(true),
+                  circularBorder: 20,
+                  margin: EdgeInsets.zero,
+                )
+              ],
+            ),
           ),
         ),
       ),

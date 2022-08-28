@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 class CreateMyRecipesController extends GetxController {
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController nameEditingController = TextEditingController();
   TextEditingController ingredientsEditingController = TextEditingController();
   TextEditingController descriptionEditingController = TextEditingController();
@@ -12,7 +13,7 @@ class CreateMyRecipesController extends GetxController {
   TextEditingController preparationTimeEditingController =
       TextEditingController();
   TextEditingController categoryEditingController = TextEditingController();
-
+  List<String> ingridients = [];
   late Box<RecipeModel> myRecipesBox;
 
   @override
@@ -28,7 +29,7 @@ class CreateMyRecipesController extends GetxController {
         id: 2,
         recipeName: nameEditingController.text,
         preparationMode: preparationModeEditingController.text,
-        ingridients: ingredientsEditingController.text.split(','),
+        ingridients: ingridients,
         category: [],
         description: descriptionEditingController.text,
         preparationTime: double.parse(preparationTimeEditingController.text),

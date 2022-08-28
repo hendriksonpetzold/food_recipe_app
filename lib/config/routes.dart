@@ -2,6 +2,7 @@ import 'package:food_recipe_app/pages/create_my_recipes/create_my_recipes_page.d
 import 'package:food_recipe_app/pages/initial/initial_page.dart';
 import 'package:food_recipe_app/pages/on_boarding/on_boarding_page.dart';
 import 'package:food_recipe_app/pages/recipe_detail/recipe_detail_page.dart';
+
 import 'package:get/get.dart';
 
 class Routes {
