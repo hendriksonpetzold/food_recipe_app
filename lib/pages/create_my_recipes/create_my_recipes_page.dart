@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/components/app_button.dart';
-import 'package:food_recipe_app/pages/create_my_recipes/components/create_my_recipes_text_form_field.dart';
+
 import 'package:food_recipe_app/pages/create_my_recipes/create_my_recipes_controller.dart';
 
 import 'package:food_recipe_app/style/app_colors.dart';
@@ -32,82 +31,65 @@ class CreateMyRecipesPage extends StatelessWidget {
         backgroundColor: AppColors.backGroundColor,
         elevation: 0,
       ),
-      body: SingleChildScrollView(
-        child: Form(
-          key: controller.formKey,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 24, right: 24),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 8,
-                ),
-                CreateMyRecipesTextFormField(
-                  label: 'Nome da receita',
-                  controller: controller.nameEditingController,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                CreateMyRecipesTextFormField(
-                  label: 'Ingredientes',
-                  controller: controller.ingredientsEditingController,
-                  suffix: IconButton(
-                    onPressed: () {
-                      controller.ingridients
-                          .add(controller.ingredientsEditingController.text);
-                      controller.formKey.currentState!.reset();
-                    },
-                    icon: const Icon(
-                      Icons.add,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                CreateMyRecipesTextFormField(
-                  label: 'Descrição',
-                  controller: controller.descriptionEditingController,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                CreateMyRecipesTextFormField(
-                  label: 'Modo de preparo',
-                  controller: controller.preparationModeEditingController,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                CreateMyRecipesTextFormField(
-                  label: 'Tempo para preparo',
-                  controller: controller.preparationTimeEditingController,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                CreateMyRecipesTextFormField(
-                  label: 'Categoria',
-                  controller: controller.categoryEditingController,
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                AppButton(
-                  label: 'Criar receita',
-                  onTap: () {
-                    controller.onCreateRecipeButtonTap();
-                    Get.back();
+      body: Form(
+        child: Obx(
+          () {
+            return Theme(
+              data: Theme.of(context).copyWith(
+                colorScheme:
+                    const ColorScheme.light(primary: AppColors.accentColor),
+              ),
+              child: Stepper(
+                  elevation: 0,
+                  type: StepperType.horizontal,
+                  steps: controller.getSteps(),
+                  currentStep: controller.currentStep.value,
+                  onStepContinue: () {
+                    final isLastStep = controller.currentStep.value ==
+                        controller.getSteps().length - 1;
+                    if (isLastStep) {
+                      controller.onFinishButtonTap();
+                      Get.back();
+                    } else {
+                      controller.currentStep.value += 1;
+                    }
                   },
-                  isSelected: RxBool(true),
-                  circularBorder: 20,
-                  margin: EdgeInsets.zero,
-                )
-              ],
-            ),
-          ),
+                  onStepCancel: controller.currentStep.value == 0
+                      ? null
+                      : () {
+                          controller.currentStep.value -= 1;
+                        },
+                  onStepTapped: (step) => controller.currentStep.value = step,
+                  controlsBuilder: (context, detail) {
+                    final isLastStep = controller.currentStep.value ==
+                        controller.getSteps().length - 1;
+                    return Container(
+                      margin: const EdgeInsets.only(top: 50),
+                      child: Row(
+                        children: [
+                          if (controller.currentStep.value != 0)
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: detail.onStepCancel,
+                                child: const Text('Voltar'),
+                              ),
+                            ),
+                          if (controller.currentStep.value != 0)
+                            const SizedBox(
+                              width: 8,
+                            ),
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: detail.onStepContinue,
+                              child: Text(isLastStep ? 'Finalizar' : 'Próximo'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+            );
+          },
         ),
       ),
     );
