@@ -1,9 +1,8 @@
 enum RecipeTypeEnum {
-  all,
-  breakFast,
+  cakes,
+  meat,
   sweet,
-  italyFood,
-  dinner,
-  lunch,
-  japaneseFood,
+  pasta,
+  desserts,
+  spanish,
 }

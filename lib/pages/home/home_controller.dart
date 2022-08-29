@@ -8,23 +8,49 @@ import 'package:hive/hive.dart';
 
 class HomeController extends GetxController {
   final TextEditingController searchEditingController = TextEditingController();
-  final Rx<RecipeTypeEnum> _activeList = Rx<RecipeTypeEnum>(RecipeTypeEnum.all);
+  final Rx<RecipeTypeEnum> _activeList =
+      Rx<RecipeTypeEnum>(RecipeTypeEnum.cakes);
   RecipeTypeEnum get activeList => _activeList.value;
   late Box<RecipeModel> recipeBox;
   CategoryRepository categoryRepository = CategoryRepository();
-  List<CategoryModel> category = [];
+  RxList<CategoryModel> category = RxList([]);
 
   @override
-  void onInit() {
+  void onInit() async {
     recipeBox = Hive.box('favorite');
-    fetchCategory();
-    print(fetchCategory());
+    await fetchCategory();
+
     super.onInit();
   }
 
   Future<void> fetchCategory() async {
-    category = await categoryRepository.findAll();
-    print(category);
+    category.value = await categoryRepository.findAll();
+  }
+
+  RecipeTypeEnum selectEnum(int index) {
+    final list = category[index];
+    switch (list.name) {
+      case 'Bolos':
+        return RecipeTypeEnum.cakes;
+
+      case 'Carnes':
+        return RecipeTypeEnum.meat;
+
+      case 'Doces':
+        return RecipeTypeEnum.sweet;
+
+      case 'Espanhola':
+        return RecipeTypeEnum.spanish;
+
+      case 'Massas':
+        return RecipeTypeEnum.pasta;
+
+      case 'Sobremesas':
+        return RecipeTypeEnum.desserts;
+
+      default:
+        return RecipeTypeEnum.cakes;
+    }
   }
 
   void changeList({required RecipeTypeEnum list}) {
@@ -36,27 +62,20 @@ class HomeController extends GetxController {
     return RxBool(false);
   }
 
-  void getListByGenre() {
+  void getListByFoodType() {
     switch (_activeList.value) {
-      case RecipeTypeEnum.all:
-        break;
+      case RecipeTypeEnum.cakes:
+
+      case RecipeTypeEnum.meat:
+
       case RecipeTypeEnum.sweet:
-        break;
 
-      case RecipeTypeEnum.breakFast:
-        break;
+      case RecipeTypeEnum.pasta:
 
-      case RecipeTypeEnum.dinner:
-        break;
+      case RecipeTypeEnum.desserts:
 
-      case RecipeTypeEnum.italyFood:
-        break;
+      case RecipeTypeEnum.spanish:
 
-      case RecipeTypeEnum.lunch:
-        break;
-
-      case RecipeTypeEnum.japaneseFood:
-        break;
       default:
     }
   }
