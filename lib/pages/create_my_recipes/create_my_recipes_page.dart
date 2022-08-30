@@ -31,66 +31,51 @@ class CreateMyRecipesPage extends StatelessWidget {
         backgroundColor: AppColors.backGroundColor,
         elevation: 0,
       ),
-      body: Form(
-        child: Obx(
-          () {
-            return Theme(
-              data: Theme.of(context).copyWith(
-                colorScheme:
-                    const ColorScheme.light(primary: AppColors.accentColor),
-              ),
-              child: Stepper(
-                  elevation: 0,
-                  type: StepperType.horizontal,
-                  steps: controller.getSteps(),
-                  currentStep: controller.currentStep.value,
-                  onStepContinue: () {
-                    final isLastStep = controller.currentStep.value ==
-                        controller.getSteps().length - 1;
-                    if (isLastStep) {
-                      controller.onFinishButtonTap();
-                      Get.back();
-                    } else {
-                      controller.currentStep.value += 1;
-                    }
-                  },
-                  onStepCancel: controller.currentStep.value == 0
-                      ? null
-                      : () {
-                          controller.currentStep.value -= 1;
-                        },
-                  onStepTapped: (step) => controller.currentStep.value = step,
-                  controlsBuilder: (context, detail) {
-                    final isLastStep = controller.currentStep.value ==
-                        controller.getSteps().length - 1;
-                    return Container(
-                      margin: const EdgeInsets.only(top: 50),
-                      child: Row(
-                        children: [
-                          if (controller.currentStep.value != 0)
-                            Expanded(
-                              child: ElevatedButton(
-                                onPressed: detail.onStepCancel,
-                                child: const Text('Voltar'),
-                              ),
-                            ),
-                          if (controller.currentStep.value != 0)
-                            const SizedBox(
-                              width: 8,
-                            ),
+      body: Obx(
+        () {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme:
+                  const ColorScheme.light(primary: AppColors.accentColor),
+            ),
+            child: Stepper(
+                elevation: 0,
+                type: StepperType.horizontal,
+                steps: controller.getSteps(),
+                currentStep: controller.currentStep.value,
+                onStepContinue: controller.onStepContinue,
+                onStepCancel: controller.onStepCancel,
+                onStepTapped: (step) => controller.currentStep.value = step,
+                controlsBuilder: (context, detail) {
+                  final isLastStep = controller.currentStep.value ==
+                      controller.getSteps().length - 1;
+                  return Container(
+                    margin: const EdgeInsets.only(top: 50),
+                    child: Row(
+                      children: [
+                        if (controller.currentStep.value != 0)
                           Expanded(
                             child: ElevatedButton(
-                              onPressed: detail.onStepContinue,
-                              child: Text(isLastStep ? 'Finalizar' : 'Próximo'),
+                              onPressed: detail.onStepCancel,
+                              child: const Text('Voltar'),
                             ),
                           ),
-                        ],
-                      ),
-                    );
-                  }),
-            );
-          },
-        ),
+                        if (controller.currentStep.value != 0)
+                          const SizedBox(
+                            width: 8,
+                          ),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: detail.onStepContinue,
+                            child: Text(isLastStep ? 'Finalizar' : 'Próximo'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+          );
+        },
       ),
     );
   }
