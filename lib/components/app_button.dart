@@ -32,11 +32,6 @@ class AppButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: isSelected.value ? AppColors.accentColor : Colors.white,
           borderRadius: BorderRadius.circular(circularBorder),
-          border: isSelected.value
-              ? null
-              : Border.all(
-                  color: AppColors.accentColor,
-                ),
         ),
         child: Center(
           child: Text(
