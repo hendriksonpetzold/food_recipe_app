@@ -22,13 +22,13 @@ class InitialController extends GetxController {
       case BottomBarPagesEnum.home:
         return 0;
 
-      case BottomBarPagesEnum.favorite:
+      case BottomBarPagesEnum.search:
         return 1;
 
-      case BottomBarPagesEnum.myRecipes:
+      case BottomBarPagesEnum.favorite:
         return 2;
 
-      case BottomBarPagesEnum.profile:
+      case BottomBarPagesEnum.myRecipes:
         return 3;
 
       default:

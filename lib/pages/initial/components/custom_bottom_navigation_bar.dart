@@ -29,6 +29,15 @@ class CustomBottomNavigationBar extends GetView<InitialController> {
               ),
               CustomBottomNavigationBarIcon(
                 onTap: () {
+                  controller.changePage(BottomBarPagesEnum.search);
+                },
+                icon: Icons.search,
+                isSelected: controller.checkActivePage(
+                  page: BottomBarPagesEnum.search,
+                ),
+              ),
+              CustomBottomNavigationBarIcon(
+                onTap: () {
                   controller.changePage(BottomBarPagesEnum.favorite);
                 },
                 icon: Icons.favorite,
@@ -43,15 +52,6 @@ class CustomBottomNavigationBar extends GetView<InitialController> {
                 icon: Icons.list_alt,
                 isSelected: controller.checkActivePage(
                   page: BottomBarPagesEnum.myRecipes,
-                ),
-              ),
-              CustomBottomNavigationBarIcon(
-                onTap: () {
-                  controller.changePage(BottomBarPagesEnum.profile);
-                },
-                icon: Icons.person,
-                isSelected: controller.checkActivePage(
-                  page: BottomBarPagesEnum.profile,
                 ),
               ),
             ],

@@ -48,6 +48,9 @@ class HomeController extends GetxController {
       case 'Sobremesas':
         return RecipeTypeEnum.desserts;
 
+      case 'Japonesa':
+        return RecipeTypeEnum.japanese;
+
       default:
         return RecipeTypeEnum.cakes;
     }

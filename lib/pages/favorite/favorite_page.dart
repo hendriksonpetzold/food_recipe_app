@@ -45,6 +45,9 @@ class FavoritePage extends StatelessWidget {
                 child: Column(
                   children: [
                     GestureDetector(
+                      onLongPress: () {
+                        controller.onLongPressed(list.id);
+                      },
                       onTap: () {
                         Get.toNamed(
                           '/initial_page/recipe_detail_page',

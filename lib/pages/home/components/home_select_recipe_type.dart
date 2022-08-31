@@ -12,7 +12,6 @@ class HomeSelectMovieTypeBar extends GetView<HomeController> {
     return Obx(() {
       return SizedBox(
         height: 50,
-        width: 940,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: controller.category.length,

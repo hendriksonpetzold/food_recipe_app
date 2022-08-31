@@ -41,6 +41,9 @@ class MyRecipesPage extends StatelessWidget {
                 child: Column(
                   children: [
                     GestureDetector(
+                      onLongPress: () {
+                        controller.onLongPress(list.recipeName);
+                      },
                       onTap: () {
                         Get.toNamed(
                           '/initial_page/recipe_detail_page',

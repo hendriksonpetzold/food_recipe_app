@@ -36,6 +36,7 @@ class CreateMyRecipesController extends GetxController {
 
   Future<void> fetchCategory() async {
     final listCatregory = await categoryRepository.findAll();
+
     for (var category in listCatregory) {
       allCategoryNames.add(category.name);
     }
@@ -186,7 +187,8 @@ class CreateMyRecipesController extends GetxController {
       ];
 
   void onFinishButtonTap() {
-    myRecipesBox.add(
+    myRecipesBox.put(
+      nameEditingController.text,
       RecipeModel(
         id: 2,
         recipeName: nameEditingController.text,

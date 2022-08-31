@@ -4,6 +4,9 @@ import 'package:hive/hive.dart';
 
 class FavoriteController extends GetxController {
   late Box<RecipeModel> recipeBox;
+  void onLongPressed(int id) {
+    recipeBox.delete(id);
+  }
 
   @override
   void onInit() {

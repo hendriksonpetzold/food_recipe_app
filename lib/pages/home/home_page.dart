@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:food_recipe_app/pages/home/components/home_recipe_list_view.dart';
-import 'package:food_recipe_app/pages/home/components/home_search_form_field.dart';
+
 import 'package:food_recipe_app/pages/home/components/home_select_recipe_type.dart';
 import 'package:food_recipe_app/pages/home/home_controller.dart';
 import 'package:food_recipe_app/style/app_colors.dart';
@@ -33,10 +33,6 @@ class HomePage extends StatelessWidget {
                   color: AppColors.textColor,
                 ),
               ),
-              const SizedBox(
-                height: 16,
-              ),
-              const HomeSearchFormField(),
               const SizedBox(
                 height: 16,
               ),

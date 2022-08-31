@@ -4,7 +4,8 @@ import 'package:food_recipe_app/pages/home/home_page.dart';
 import 'package:food_recipe_app/pages/initial/components/custom_bottom_navigation_bar.dart';
 import 'package:food_recipe_app/pages/initial/initial_controller.dart';
 import 'package:food_recipe_app/pages/my_recipes/my_recipes_page.dart';
-import 'package:food_recipe_app/pages/profile/profile_page.dart';
+
+import 'package:food_recipe_app/pages/search_recipes/search_recipes_page.dart';
 
 import 'package:get/get.dart';
 
@@ -20,9 +21,9 @@ class InitialPage extends StatelessWidget {
             index: controller.getPageIndex(),
             children: [
               HomePage(),
+              const SearchRecipesPage(),
               FavoritePage(),
               MyRecipesPage(),
-              ProfilePage(),
             ],
           );
         },

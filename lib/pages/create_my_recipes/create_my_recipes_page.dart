@@ -45,7 +45,6 @@ class CreateMyRecipesPage extends StatelessWidget {
                 currentStep: controller.currentStep.value,
                 onStepContinue: controller.onStepContinue,
                 onStepCancel: controller.onStepCancel,
-                onStepTapped: (step) => controller.currentStep.value = step,
                 controlsBuilder: (context, detail) {
                   final isLastStep = controller.currentStep.value ==
                       controller.getSteps().length - 1;

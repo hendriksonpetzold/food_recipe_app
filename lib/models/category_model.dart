@@ -1,19 +1,16 @@
 import 'dart:convert';
 
-import 'package:food_recipe_app/enums/recipe_type_enum.dart';
-
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 class CategoryModel {
   int id;
   String name;
   String createdAt;
-  RecipeTypeEnum? recipeEnum;
+
   CategoryModel({
     required this.id,
     required this.name,
     required this.createdAt,
-    this.recipeEnum,
   });
 
   Map<String, dynamic> toMap() {

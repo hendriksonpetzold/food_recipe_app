@@ -4,6 +4,9 @@ import 'package:hive/hive.dart';
 
 class MyRecipesController extends GetxController {
   late Box<RecipeModel> myRecipesBox;
+  void onLongPress(String recipeName) {
+    myRecipesBox.delete(recipeName);
+  }
 
   @override
   void onInit() {

@@ -53,21 +53,27 @@ class RecipeDetailPage extends StatelessWidget {
               const SizedBox(
                 height: 16,
               ),
-              const TabBar(
+              TabBar(
                 indicatorColor: AppColors.accentColor,
                 tabs: [
-                  Text(
-                    'Ingredientes',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
+                  Container(
+                    padding: const EdgeInsets.only(bottom: 4),
+                    child: const Text(
+                      'Ingredientes',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
-                  Text(
-                    'Modo de preparo',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
+                  Container(
+                    padding: const EdgeInsets.only(bottom: 4),
+                    child: const Text(
+                      'Modo de preparo',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                 ],

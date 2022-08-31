@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/pages/home/home_controller.dart';
 import 'package:get/get.dart';
 
-class HomeSearchFormField extends GetView<HomeController> {
-  const HomeSearchFormField({Key? key}) : super(key: key);
+class SearchRecipesSearchFormField extends GetView<HomeController> {
+  const SearchRecipesSearchFormField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
