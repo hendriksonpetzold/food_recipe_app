@@ -4,10 +4,11 @@ import 'package:food_recipe_app/style/app_colors.dart';
 
 class RecipeCard extends StatelessWidget {
   final String recipeName;
-
+  final Widget? suffix;
   const RecipeCard({
     Key? key,
     required this.recipeName,
+    this.suffix,
   }) : super(key: key);
 
   @override
@@ -35,6 +36,7 @@ class RecipeCard extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
+          suffix != null ? suffix! : Container()
         ],
       ),
     );

@@ -9,54 +9,57 @@ class CustomBottomNavigationBar extends GetView<InitialController> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 50,
-      width: double.infinity,
-      color: Colors.white,
-      child: Obx(
-        () {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CustomBottomNavigationBarIcon(
-                onTap: () {
-                  controller.changePage(BottomBarPagesEnum.home);
-                },
-                icon: Icons.home,
-                isSelected: controller.checkActivePage(
-                  page: BottomBarPagesEnum.home,
+    return Material(
+      elevation: 1,
+      child: Container(
+        height: 50,
+        width: double.infinity,
+        color: Colors.white,
+        child: Obx(
+          () {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CustomBottomNavigationBarIcon(
+                  onTap: () {
+                    controller.changePage(BottomBarPagesEnum.home);
+                  },
+                  icon: Icons.home,
+                  isSelected: controller.checkActivePage(
+                    page: BottomBarPagesEnum.home,
+                  ),
                 ),
-              ),
-              CustomBottomNavigationBarIcon(
-                onTap: () {
-                  controller.changePage(BottomBarPagesEnum.search);
-                },
-                icon: Icons.search,
-                isSelected: controller.checkActivePage(
-                  page: BottomBarPagesEnum.search,
+                CustomBottomNavigationBarIcon(
+                  onTap: () {
+                    controller.changePage(BottomBarPagesEnum.search);
+                  },
+                  icon: Icons.search,
+                  isSelected: controller.checkActivePage(
+                    page: BottomBarPagesEnum.search,
+                  ),
                 ),
-              ),
-              CustomBottomNavigationBarIcon(
-                onTap: () {
-                  controller.changePage(BottomBarPagesEnum.favorite);
-                },
-                icon: Icons.favorite,
-                isSelected: controller.checkActivePage(
-                  page: BottomBarPagesEnum.favorite,
+                CustomBottomNavigationBarIcon(
+                  onTap: () {
+                    controller.changePage(BottomBarPagesEnum.favorite);
+                  },
+                  icon: Icons.favorite,
+                  isSelected: controller.checkActivePage(
+                    page: BottomBarPagesEnum.favorite,
+                  ),
                 ),
-              ),
-              CustomBottomNavigationBarIcon(
-                onTap: () {
-                  controller.changePage(BottomBarPagesEnum.myRecipes);
-                },
-                icon: Icons.list_alt,
-                isSelected: controller.checkActivePage(
-                  page: BottomBarPagesEnum.myRecipes,
+                CustomBottomNavigationBarIcon(
+                  onTap: () {
+                    controller.changePage(BottomBarPagesEnum.myRecipes);
+                  },
+                  icon: Icons.list_alt,
+                  isSelected: controller.checkActivePage(
+                    page: BottomBarPagesEnum.myRecipes,
+                  ),
                 ),
-              ),
-            ],
-          );
-        },
+              ],
+            );
+          },
+        ),
       ),
     );
   }

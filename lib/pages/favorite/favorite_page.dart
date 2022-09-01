@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/components/show_custom_dialog.dart';
 import 'package:food_recipe_app/models/recipe_model.dart';
 import 'package:food_recipe_app/pages/favorite/favorite_controller.dart';
 import 'package:food_recipe_app/components/recipe_card.dart';
@@ -45,9 +46,6 @@ class FavoritePage extends StatelessWidget {
                 child: Column(
                   children: [
                     GestureDetector(
-                      onLongPress: () {
-                        controller.onLongPressed(list.id);
-                      },
                       onTap: () {
                         Get.toNamed(
                           '/initial_page/recipe_detail_page',
@@ -62,6 +60,18 @@ class FavoritePage extends StatelessWidget {
                       },
                       child: RecipeCard(
                         recipeName: list.recipeName,
+                        suffix: GestureDetector(
+                          onTap: () {
+                            showCustomDialog(context, onConfirmButtonTap: () {
+                              controller.deleteFavorite(list.id);
+                              Get.back();
+                            });
+                          },
+                          child: const Icon(
+                            Icons.delete,
+                            color: AppColors.textColor,
+                          ),
+                        ),
                       ),
                     ),
                     const SizedBox(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/components/show_custom_dialog.dart';
 import 'package:food_recipe_app/models/recipe_model.dart';
 import 'package:food_recipe_app/components/recipe_card.dart';
 import 'package:food_recipe_app/pages/my_recipes/my_recipes_controller.dart';
@@ -41,9 +42,6 @@ class MyRecipesPage extends StatelessWidget {
                 child: Column(
                   children: [
                     GestureDetector(
-                      onLongPress: () {
-                        controller.onLongPress(list.recipeName);
-                      },
                       onTap: () {
                         Get.toNamed(
                           '/initial_page/recipe_detail_page',
@@ -58,6 +56,21 @@ class MyRecipesPage extends StatelessWidget {
                       },
                       child: RecipeCard(
                         recipeName: list.recipeName,
+                        suffix: GestureDetector(
+                          onTap: () {
+                            showCustomDialog(
+                              context,
+                              onConfirmButtonTap: () {
+                                controller.deleteRecipe(list.recipeName);
+                                Get.back();
+                              },
+                            );
+                          },
+                          child: const Icon(
+                            Icons.delete,
+                            color: AppColors.textColor,
+                          ),
+                        ),
                       ),
                     ),
                     const SizedBox(

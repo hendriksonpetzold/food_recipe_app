@@ -5,5 +5,5 @@ enum RecipeTypeEnum {
   pasta,
   desserts,
   spanish,
-  japanese,
+  all,
 }

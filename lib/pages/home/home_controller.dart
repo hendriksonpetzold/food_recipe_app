@@ -5,31 +5,46 @@ import 'package:food_recipe_app/models/recipe_model.dart';
 import 'package:food_recipe_app/repository/category_repository.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomeController extends GetxController {
   final TextEditingController searchEditingController = TextEditingController();
-  final Rx<RecipeTypeEnum> _activeList =
-      Rx<RecipeTypeEnum>(RecipeTypeEnum.cakes);
+  final Rx<RecipeTypeEnum> _activeList = Rx<RecipeTypeEnum>(RecipeTypeEnum.all);
   RecipeTypeEnum get activeList => _activeList.value;
   late Box<RecipeModel> recipeBox;
   CategoryRepository categoryRepository = CategoryRepository();
-  RxList<CategoryModel> category = RxList([]);
 
+  List<String> category = [
+    'Bolos',
+    'Carnes',
+    'Doces',
+    'Espanhola',
+    'Massas',
+    'Sobremesas'
+  ];
+  int currentPage = 1;
+  RefreshController refreshController = RefreshController(initialRefresh: true);
   @override
   void onInit() async {
     recipeBox = Hive.box('favorite');
-    await fetchCategory();
 
     super.onInit();
   }
 
-  Future<void> fetchCategory() async {
-    category.value = await categoryRepository.findAll();
+  Future<bool> fetchRecipes({bool isRefresh = false}) async {
+    if (isRefresh) {
+      currentPage = 1;
+    }
+    print(currentPage);
+    //TODO implement recipes list
+    currentPage++;
+    print(currentPage);
+    return true;
   }
 
   RecipeTypeEnum selectEnum(int index) {
     final list = category[index];
-    switch (list.name) {
+    switch (list) {
       case 'Bolos':
         return RecipeTypeEnum.cakes;
 
@@ -48,25 +63,24 @@ class HomeController extends GetxController {
       case 'Sobremesas':
         return RecipeTypeEnum.desserts;
 
-      case 'Japonesa':
-        return RecipeTypeEnum.japanese;
-
       default:
-        return RecipeTypeEnum.cakes;
+        return RecipeTypeEnum.all;
     }
   }
 
-  void changeList({required RecipeTypeEnum list}) {
-    _activeList.value = list;
+  void changeList({required RecipeTypeEnum enumValue}) {
+    _activeList.value = enumValue;
   }
 
-  RxBool checkActiveList({required RecipeTypeEnum list}) {
-    if (list == _activeList.value) return RxBool(true);
+  RxBool checkActiveList({required RecipeTypeEnum enumValue}) {
+    if (enumValue == _activeList.value) return RxBool(true);
     return RxBool(false);
   }
 
   void getListByFoodType() {
     switch (_activeList.value) {
+      case RecipeTypeEnum.all:
+
       case RecipeTypeEnum.cakes:
 
       case RecipeTypeEnum.meat:
