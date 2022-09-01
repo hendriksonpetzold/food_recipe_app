@@ -14,6 +14,7 @@ class CreateMyRecipesCustomDropDownFormField extends StatelessWidget {
       decoration: const InputDecoration(border: OutlineInputBorder()),
       dropdownColor: AppColors.backGroundColor,
       isDense: true,
+      hint: const Text('Selecione a categoria da receita'),
       items: items
           .map(
             (item) => DropdownMenuItem<String>(

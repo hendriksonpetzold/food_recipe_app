@@ -20,7 +20,7 @@ class CustomDialog extends Dialog {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'Tem certeza que deseja deletar?',
+                  'Tem certeza que deseja excluir?',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 14,

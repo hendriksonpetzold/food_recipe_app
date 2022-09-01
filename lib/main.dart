@@ -9,5 +9,6 @@ void main() async {
   Hive.registerAdapter(RecipeModelAdapter());
   await Hive.openBox<RecipeModel>('favorite');
   await Hive.openBox<RecipeModel>('my_recipes');
+  await Hive.openBox('category');
   runApp(const App());
 }
