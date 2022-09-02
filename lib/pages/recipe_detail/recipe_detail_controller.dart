@@ -11,7 +11,7 @@ class RecipeDetailController extends GetxController {
   late Box<RecipeModel> recipeBox;
   @override
   void onInit() {
-    recipeBox = Hive.box('favorite');
+    recipeBox = Hive.box('all_favorite');
 
     super.onInit();
   }
@@ -32,9 +32,9 @@ class RecipeDetailController extends GetxController {
           id: id,
           isFavorite: isFavorite.value,
           rating: 0,
-          preparationTime: 0,
+          preparationTime: DateTime.parse('2020-10-21T05:00:57.258Z'),
           category: [],
-          createdAt: 0,
+          createdAt: DateTime.now(),
           description: '',
         ),
       );

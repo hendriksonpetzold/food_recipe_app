@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+
 import 'package:hive/hive.dart';
 
 part 'recipe_model.g.dart';
@@ -24,16 +26,16 @@ class RecipeModel extends HiveObject {
   String description;
 
   @HiveField(6)
-  double preparationTime;
+  DateTime preparationTime;
 
   @HiveField(7)
-  int rating;
+  int? rating;
 
   @HiveField(8)
-  int createdAt;
+  DateTime createdAt;
 
   @HiveField(9)
-  bool isFavorite;
+  bool? isFavorite;
 
   RecipeModel({
     required this.id,
@@ -43,9 +45,9 @@ class RecipeModel extends HiveObject {
     required this.category,
     required this.description,
     required this.preparationTime,
-    required this.rating,
+    this.rating,
     required this.createdAt,
-    required this.isFavorite,
+    this.isFavorite,
   });
 
   RecipeModel copyWith({
@@ -55,9 +57,9 @@ class RecipeModel extends HiveObject {
     List<String>? ingridients,
     List<String>? category,
     String? description,
-    double? preparationTime,
+    DateTime? preparationTime,
     int? rating,
-    int? createdAt,
+    DateTime? createdAt,
     bool? isFavorite,
   }) {
     return RecipeModel(
@@ -72,5 +74,43 @@ class RecipeModel extends HiveObject {
       createdAt: createdAt ?? this.createdAt,
       isFavorite: isFavorite ?? this.isFavorite,
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'recipeName': recipeName,
+      'preparationMode': preparationMode,
+      'ingridients': ingridients,
+      'category': category,
+      'description': description,
+      'preparationTime': preparationTime,
+      'rating': rating,
+      'createdAt': createdAt,
+    };
+  }
+
+  factory RecipeModel.fromMap(Map<String, dynamic> map) {
+    return RecipeModel(
+      id: map['ID'] as int,
+      recipeName: map['Name'] as String,
+      preparationMode: map['PrepareMethod'] as String,
+      ingridients: List<String>.from((map['Ingredients'])),
+      category: List<String>.from((map['Categories'])),
+      description: map['Description'] as String,
+      preparationTime: DateTime.parse(map['PreparationTime'].toString()),
+      // rating: map['Rating'] as int,
+      createdAt: DateTime.parse(map['CreatedAt'].toString()),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory RecipeModel.fromJson(String source) =>
+      RecipeModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'RecipeModel(id: $id, recipeName: $recipeName, preparationMode: $preparationMode, ingridients: $ingridients, category: $category, description: $description, preparationTime: $preparationTime, rating: $rating, createdAt: $createdAt, isFavorite: $isFavorite)';
   }
 }

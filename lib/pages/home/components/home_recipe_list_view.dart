@@ -9,8 +9,8 @@ class HomeRecipeListView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: SmartRefresher(
+    return Expanded(child: Obx(() {
+      return SmartRefresher(
         controller: controller.refreshController,
         enablePullUp: true,
         onRefresh: () async {
@@ -62,7 +62,7 @@ class HomeRecipeListView extends GetView<HomeController> {
             );
           },
         ),
-      ),
-    );
+      );
+    }));
   }
 }

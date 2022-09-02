@@ -23,10 +23,10 @@ class RecipeModelAdapter extends TypeAdapter<RecipeModel> {
       ingridients: (fields[3] as List).cast<String>(),
       category: (fields[4] as List).cast<String>(),
       description: fields[5] as String,
-      preparationTime: fields[6] as double,
-      rating: fields[7] as int,
-      createdAt: fields[8] as int,
-      isFavorite: fields[9] as bool,
+      preparationTime: fields[6] as DateTime,
+      rating: fields[7] as int?,
+      createdAt: fields[8] as DateTime,
+      isFavorite: fields[9] as bool?,
     );
   }
 

@@ -4,7 +4,7 @@ import 'package:food_recipe_app/pages/create_my_recipes/components/create_my_rec
 import 'package:food_recipe_app/pages/create_my_recipes/components/create_my_recipes_custom_drop_down_form_field.dart';
 import 'package:food_recipe_app/pages/create_my_recipes/components/create_my_recipes_ingridients_list_view.dart';
 import 'package:food_recipe_app/pages/create_my_recipes/components/create_my_recipes_text_form_field.dart';
-import 'package:food_recipe_app/repository/category_repository.dart';
+import 'package:food_recipe_app/repository/repository.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
@@ -21,7 +21,7 @@ class CreateMyRecipesController extends GetxController {
       TextEditingController();
   TextEditingController categoryEditingController = TextEditingController();
   late Box<RecipeModel> myRecipesBox;
-  CategoryRepository categoryRepository = CategoryRepository();
+  Repository repository = Repository();
   RxList<String> ingridients = RxList([]);
   RxInt currentStep = RxInt(0);
   RxList<String> allCategoryNames = RxList([]);
@@ -35,7 +35,7 @@ class CreateMyRecipesController extends GetxController {
   }
 
   Future<void> fetchCategory() async {
-    final listCatregory = await categoryRepository.findAll();
+    final listCatregory = await repository.findAllCategories();
 
     for (var category in listCatregory) {
       allCategoryNames.add(category.name);
@@ -196,9 +196,9 @@ class CreateMyRecipesController extends GetxController {
         ingridients: ingridients,
         category: categoryNames,
         description: descriptionEditingController.text,
-        preparationTime: double.parse(preparationTimeEditingController.text),
+        preparationTime: DateTime.parse(preparationTimeEditingController.text),
         rating: 5,
-        createdAt: 6,
+        createdAt: DateTime.now(),
         isFavorite: false,
       ),
     );
