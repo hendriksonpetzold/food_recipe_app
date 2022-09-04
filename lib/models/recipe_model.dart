@@ -3,6 +3,8 @@ import 'dart:convert';
 
 import 'package:hive/hive.dart';
 
+import 'raiting_model.dart';
+
 part 'recipe_model.g.dart';
 
 @HiveType(typeId: 0)
@@ -29,7 +31,7 @@ class RecipeModel extends HiveObject {
   DateTime preparationTime;
 
   @HiveField(7)
-  int? rating;
+  RaitingModel? rating;
 
   @HiveField(8)
   DateTime createdAt;
@@ -58,7 +60,7 @@ class RecipeModel extends HiveObject {
     List<String>? category,
     String? description,
     DateTime? preparationTime,
-    int? rating,
+    RaitingModel? rating,
     DateTime? createdAt,
     bool? isFavorite,
   }) {
@@ -99,7 +101,9 @@ class RecipeModel extends HiveObject {
       category: List<String>.from((map['Categories'])),
       description: map['Description'] as String,
       preparationTime: DateTime.parse(map['PreparationTime'].toString()),
-      // rating: map['Rating'] as int,
+      rating: map['rating'] != null
+          ? RaitingModel.fromMap(map['rating'] as Map<String, dynamic>)
+          : null,
       createdAt: DateTime.parse(map['CreatedAt'].toString()),
     );
   }

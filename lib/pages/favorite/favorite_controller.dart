@@ -10,7 +10,7 @@ class FavoriteController extends GetxController {
 
   @override
   void onInit() {
-    recipeBox = Hive.box('all_favorite');
+    recipeBox = Hive.box('favorite');
 
     super.onInit();
   }

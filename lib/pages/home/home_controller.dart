@@ -28,7 +28,7 @@ class HomeController extends GetxController {
 
   @override
   void onInit() async {
-    recipeBox = Hive.box('all_favorite');
+    recipeBox = Hive.box('favorite');
 
     super.onInit();
   }

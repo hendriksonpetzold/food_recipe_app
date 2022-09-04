@@ -48,6 +48,8 @@ class HomeRecipeListView extends GetView<HomeController> {
                         'preparation_mode': list.preparationMode,
                         'is_favorite': box?.isFavorite ?? false,
                         'id': list.id,
+                        'description': list.description,
+                        'preparation_time': list.preparationTime,
                       },
                     );
                   },
