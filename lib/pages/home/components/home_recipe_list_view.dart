@@ -14,7 +14,7 @@ class HomeRecipeListView extends GetView<HomeController> {
         controller: controller.refreshController,
         enablePullUp: true,
         onRefresh: () async {
-          final result = await controller.fetchRecipes(isRefresh: true);
+          final result = await controller.getListByFoodType(isRefresh: true);
           if (result == true) {
             controller.refreshController.refreshCompleted();
           } else {
@@ -22,7 +22,7 @@ class HomeRecipeListView extends GetView<HomeController> {
           }
         },
         onLoading: () async {
-          final result = await controller.fetchRecipes();
+          final result = await controller.getListByFoodType();
           if (result == true) {
             controller.refreshController.refreshCompleted();
           } else {
@@ -50,6 +50,8 @@ class HomeRecipeListView extends GetView<HomeController> {
                         'id': list.id,
                         'description': list.description,
                         'preparation_time': list.preparationTime,
+                        'rating': list.rating,
+                        'categories': list.category,
                       },
                     );
                   },

@@ -22,7 +22,7 @@ class HomeSelectMovieTypeBar extends GetView<HomeController> {
                   label: 'Início',
                   onTap: () {
                     controller.changeList(enumValue: RecipeTypeEnum.all);
-                    controller.getListByFoodType();
+                    controller.getListByFoodType(isRefresh: true);
                   },
                   isSelected:
                       controller.checkActiveList(enumValue: RecipeTypeEnum.all),
@@ -36,7 +36,7 @@ class HomeSelectMovieTypeBar extends GetView<HomeController> {
                   label: list,
                   onTap: () {
                     controller.changeList(enumValue: listEnum);
-                    controller.getListByFoodType();
+                    controller.getListByFoodType(isRefresh: true);
                   },
                   isSelected: controller.checkActiveList(enumValue: listEnum),
                   height: 50,

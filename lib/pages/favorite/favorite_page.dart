@@ -55,6 +55,10 @@ class FavoritePage extends StatelessWidget {
                             'preparation_mode': list.preparationMode,
                             'is_favorite': list.isFavorite,
                             'id': list.id,
+                            'description': list.description,
+                            'preparation_time': list.preparationTime,
+                            'rating': list.rating,
+                            'categories': list.category,
                           },
                         );
                       },

@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:hive/hive.dart';
 
-import 'raiting_model.dart';
+import 'rating_model.dart';
 
 part 'recipe_model.g.dart';
 
@@ -31,7 +31,7 @@ class RecipeModel extends HiveObject {
   DateTime preparationTime;
 
   @HiveField(7)
-  RaitingModel? rating;
+  RatingModel? rating;
 
   @HiveField(8)
   DateTime createdAt;
@@ -47,7 +47,7 @@ class RecipeModel extends HiveObject {
     required this.category,
     required this.description,
     required this.preparationTime,
-    this.rating,
+    required this.rating,
     required this.createdAt,
     this.isFavorite,
   });
@@ -60,7 +60,7 @@ class RecipeModel extends HiveObject {
     List<String>? category,
     String? description,
     DateTime? preparationTime,
-    RaitingModel? rating,
+    RatingModel? raiting,
     DateTime? createdAt,
     bool? isFavorite,
   }) {
@@ -72,7 +72,7 @@ class RecipeModel extends HiveObject {
       category: category ?? this.category,
       description: description ?? this.description,
       preparationTime: preparationTime ?? this.preparationTime,
-      rating: rating ?? this.rating,
+      rating: raiting ?? this.rating,
       createdAt: createdAt ?? this.createdAt,
       isFavorite: isFavorite ?? this.isFavorite,
     );
@@ -101,8 +101,8 @@ class RecipeModel extends HiveObject {
       category: List<String>.from((map['Categories'])),
       description: map['Description'] as String,
       preparationTime: DateTime.parse(map['PreparationTime'].toString()),
-      rating: map['rating'] != null
-          ? RaitingModel.fromMap(map['rating'] as Map<String, dynamic>)
+      rating: map['Rating'] != null
+          ? RatingModel.fromMap(map['Rating'] as Map<String, dynamic>)
           : null,
       createdAt: DateTime.parse(map['CreatedAt'].toString()),
     );

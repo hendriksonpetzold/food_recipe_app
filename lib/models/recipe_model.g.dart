@@ -24,7 +24,7 @@ class RecipeModelAdapter extends TypeAdapter<RecipeModel> {
       category: (fields[4] as List).cast<String>(),
       description: fields[5] as String,
       preparationTime: fields[6] as DateTime,
-      rating: fields[7] as RaitingModel?,
+      rating: fields[7] as RatingModel?,
       createdAt: fields[8] as DateTime,
       isFavorite: fields[9] as bool?,
     );

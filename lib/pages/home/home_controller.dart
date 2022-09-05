@@ -38,19 +38,33 @@ class HomeController extends GetxController {
       currentPage = 1;
     }
     final result = await repository.findRecipes(page: currentPage);
-
-    if (result.isEmpty) {
-      return false;
+    print(result);
+    if (isRefresh) {
+      recipe.value = result;
     } else {
-      if (isRefresh) {
-        recipe.value = result;
-      } else {
-        recipe.addAll(result);
-      }
-      currentPage++;
-
-      return true;
+      recipe.addAll(result);
     }
+    currentPage++;
+
+    return true;
+  }
+
+  Future<bool> fetchRecipesByCategory(
+      {bool isRefresh = false, required String category}) async {
+    if (isRefresh) {
+      currentPage = 1;
+    }
+    final result = await repository
+        .findRecipesByCategory(page: currentPage, categories: [category]);
+
+    if (isRefresh) {
+      recipe.value = result;
+    } else {
+      recipe.addAll(result);
+    }
+    currentPage++;
+
+    return true;
   }
 
   RecipeTypeEnum selectEnum(int index) {
@@ -88,23 +102,27 @@ class HomeController extends GetxController {
     return RxBool(false);
   }
 
-  void getListByFoodType() {
+  Future<bool> getListByFoodType({bool isRefresh = false}) {
     switch (_activeList.value) {
       case RecipeTypeEnum.all:
-
+        return fetchRecipes(isRefresh: isRefresh);
       case RecipeTypeEnum.cakes:
-
+        return fetchRecipesByCategory(
+            isRefresh: isRefresh, category: 'bolinho');
       case RecipeTypeEnum.meat:
-
+        return fetchRecipesByCategory(isRefresh: isRefresh, category: 'carnes');
       case RecipeTypeEnum.sweet:
-
+        return fetchRecipesByCategory(isRefresh: isRefresh, category: 'doces');
       case RecipeTypeEnum.pasta:
-
+        return fetchRecipesByCategory(isRefresh: isRefresh, category: 'massar');
       case RecipeTypeEnum.desserts:
-
+        return fetchRecipesByCategory(
+            isRefresh: isRefresh, category: 'sobremesas');
       case RecipeTypeEnum.spanish:
-
+        return fetchRecipesByCategory(
+            isRefresh: isRefresh, category: 'espanhola');
       default:
+        return fetchRecipes(isRefresh: isRefresh);
     }
   }
 }

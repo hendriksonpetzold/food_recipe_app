@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/models/raiting_model.dart';
+import 'package:food_recipe_app/models/rating_model.dart';
+import 'package:food_recipe_app/models/rating_model.dart';
 import 'package:food_recipe_app/models/recipe_model.dart';
 import 'package:food_recipe_app/pages/create_my_recipes/components/create_my_recipes_category_list_view.dart';
 import 'package:food_recipe_app/pages/create_my_recipes/components/create_my_recipes_custom_drop_down_form_field.dart';
@@ -198,7 +199,7 @@ class CreateMyRecipesController extends GetxController {
         category: categoryNames,
         description: descriptionEditingController.text,
         preparationTime: DateTime.parse(preparationTimeEditingController.text),
-        rating: RaitingModel(raiting: 5, valid: true),
+        rating: RatingModel(rating: 5, valid: true),
         createdAt: DateTime.now(),
         isFavorite: false,
       ),

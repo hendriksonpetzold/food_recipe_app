@@ -51,6 +51,8 @@ class MyRecipesPage extends StatelessWidget {
                             'preparation_mode': list.preparationMode,
                             'is_favorite': false,
                             'id': list.id,
+                            'description': list.description,
+                            'preparation_time': list.preparationTime,
                           },
                         );
                       },
