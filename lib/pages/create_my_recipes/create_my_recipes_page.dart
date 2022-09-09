@@ -49,7 +49,7 @@ class CreateMyRecipesPage extends StatelessWidget {
                   final isLastStep = controller.currentStep.value ==
                       controller.getSteps().length - 1;
                   return Container(
-                    margin: const EdgeInsets.only(top: 50),
+                    margin: const EdgeInsets.only(top: 30),
                     child: Row(
                       children: [
                         if (controller.currentStep.value != 0)

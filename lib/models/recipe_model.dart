@@ -10,7 +10,7 @@ part 'recipe_model.g.dart';
 @HiveType(typeId: 0)
 class RecipeModel extends HiveObject {
   @HiveField(0)
-  int id;
+  int? id;
 
   @HiveField(1)
   String recipeName;
@@ -34,21 +34,21 @@ class RecipeModel extends HiveObject {
   RatingModel? rating;
 
   @HiveField(8)
-  DateTime createdAt;
+  DateTime? createdAt;
 
   @HiveField(9)
   bool? isFavorite;
 
   RecipeModel({
-    required this.id,
+    this.id,
     required this.recipeName,
     required this.preparationMode,
     required this.ingridients,
     required this.category,
     required this.description,
     required this.preparationTime,
-    required this.rating,
-    required this.createdAt,
+    this.rating,
+    this.createdAt,
     this.isFavorite,
   });
 
@@ -60,7 +60,7 @@ class RecipeModel extends HiveObject {
     List<String>? category,
     String? description,
     DateTime? preparationTime,
-    RatingModel? raiting,
+    RatingModel? rating,
     DateTime? createdAt,
     bool? isFavorite,
   }) {
@@ -72,7 +72,7 @@ class RecipeModel extends HiveObject {
       category: category ?? this.category,
       description: description ?? this.description,
       preparationTime: preparationTime ?? this.preparationTime,
-      rating: raiting ?? this.rating,
+      rating: rating ?? this.rating,
       createdAt: createdAt ?? this.createdAt,
       isFavorite: isFavorite ?? this.isFavorite,
     );
@@ -81,12 +81,12 @@ class RecipeModel extends HiveObject {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'recipeName': recipeName,
-      'preparationMode': preparationMode,
-      'ingridients': ingridients,
-      'category': category,
+      'name': recipeName,
+      'prepare_methor': preparationMode,
+      'ingredients': ingridients,
+      'categories': category,
       'description': description,
-      'preparationTime': preparationTime,
+      'preparation_time': preparationTime,
       'rating': rating,
       'createdAt': createdAt,
     };

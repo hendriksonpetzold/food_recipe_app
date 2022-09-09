@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/models/rating_model.dart';
-import 'package:food_recipe_app/models/rating_model.dart';
+
 import 'package:food_recipe_app/models/recipe_model.dart';
 import 'package:food_recipe_app/pages/create_my_recipes/components/create_my_recipes_category_list_view.dart';
 import 'package:food_recipe_app/pages/create_my_recipes/components/create_my_recipes_custom_drop_down_form_field.dart';
@@ -15,7 +15,7 @@ class CreateMyRecipesController extends GetxController {
   GlobalKey<FormState> stepTwoformKey = GlobalKey<FormState>();
   GlobalKey<FormState> stepThreeformKey = GlobalKey<FormState>();
   TextEditingController nameEditingController = TextEditingController();
-  TextEditingController ingredientsEditingController = TextEditingController();
+  TextEditingController ingridientsEditingController = TextEditingController();
   TextEditingController descriptionEditingController = TextEditingController();
   TextEditingController preparationModeEditingController =
       TextEditingController();
@@ -83,7 +83,7 @@ class CreateMyRecipesController extends GetxController {
                   label: 'Nome da sua receita',
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Adicione um ingrediente';
+                      return 'Coloque o nome da receita';
                     }
                     return null;
                   },
@@ -122,13 +122,14 @@ class CreateMyRecipesController extends GetxController {
                 CreateMyRecipesTextFormField(
                   controller: preparationModeEditingController,
                   label: 'Modo de preparo',
+                  maxLines: null,
                 ),
                 const SizedBox(
                   height: 16,
                 ),
                 CreateMyRecipesTextFormField(
                   controller: preparationTimeEditingController,
-                  label: 'Tempo para preparo',
+                  label: 'Tempo para preparo(em minutos)',
                 ),
               ],
             ),
@@ -145,19 +146,23 @@ class CreateMyRecipesController extends GetxController {
                 CreateMyRecipesTextFormField(
                   onFieldSubmitted: (text) {
                     ingridients.add(text);
+                    ingridientsEditingController.clear();
                   },
-                  controller: ingredientsEditingController,
+                  controller: ingridientsEditingController,
                   label: 'Adicione os ingredientes',
                   validator: (value) {
-                    if (value!.isEmpty) {
+                    if (ingridients.isEmpty) {
                       return 'Adicione um ingrediente';
                     }
                     return null;
                   },
                   suffix: GestureDetector(
                     onTap: () {
-                      if (stepThreeformKey.currentState!.validate()) {
-                        ingridients.add(ingredientsEditingController.text);
+                      if (ingridientsEditingController.text.isNotEmpty) {
+                        ingridients.add(ingridientsEditingController.text);
+                        ingridients.toSet().toList();
+                        ingridientsEditingController.clear();
+                        stepThreeformKey.currentState!.reset();
                       }
                     },
                     child: const Icon(
@@ -177,11 +182,26 @@ class CreateMyRecipesController extends GetxController {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Nome da receita: ${nameEditingController.text}'),
+              const SizedBox(
+                height: 8,
+              ),
               Text('Ingredientes: ${ingridients.join(',')}'),
+              const SizedBox(
+                height: 8,
+              ),
               Text('Modo de preparo: ${preparationModeEditingController.text}'),
+              const SizedBox(
+                height: 8,
+              ),
               Text(
                   'Tempo de preparo: ${preparationTimeEditingController.text}'),
+              const SizedBox(
+                height: 8,
+              ),
               Text('Categoria: ${categoryNames.join(',')}'),
+              const SizedBox(
+                height: 8,
+              ),
               Text('Descrição: ${descriptionEditingController.text}'),
             ],
           ),
@@ -192,13 +212,14 @@ class CreateMyRecipesController extends GetxController {
     myRecipesBox.put(
       nameEditingController.text,
       RecipeModel(
-        id: 2,
+        id: 0,
         recipeName: nameEditingController.text,
         preparationMode: preparationModeEditingController.text,
         ingridients: ingridients,
         category: categoryNames,
         description: descriptionEditingController.text,
-        preparationTime: DateTime.parse(preparationTimeEditingController.text),
+        preparationTime: DateTime(2022).add(Duration(
+            minutes: int.parse(preparationTimeEditingController.text))),
         rating: RatingModel(rating: 5, valid: true),
         createdAt: DateTime.now(),
         isFavorite: false,

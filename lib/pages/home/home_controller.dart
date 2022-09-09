@@ -37,16 +37,20 @@ class HomeController extends GetxController {
     if (isRefresh) {
       currentPage = 1;
     }
-    final result = await repository.findRecipes(page: currentPage);
-    print(result);
-    if (isRefresh) {
-      recipe.value = result;
-    } else {
-      recipe.addAll(result);
-    }
-    currentPage++;
 
-    return true;
+    final result = await repository.findRecipes(page: currentPage);
+    if (result.isEmpty) {
+      return false;
+    } else {
+      if (isRefresh) {
+        recipe.value = result;
+      } else {
+        recipe.addAll(result);
+      }
+      currentPage++;
+
+      return true;
+    }
   }
 
   Future<bool> fetchRecipesByCategory(
@@ -56,15 +60,18 @@ class HomeController extends GetxController {
     }
     final result = await repository
         .findRecipesByCategory(page: currentPage, categories: [category]);
-
-    if (isRefresh) {
-      recipe.value = result;
+    if (result.isEmpty) {
+      return false;
     } else {
-      recipe.addAll(result);
-    }
-    currentPage++;
+      if (isRefresh) {
+        recipe.value = result;
+      } else {
+        recipe.addAll(result);
+      }
+      currentPage++;
 
-    return true;
+      return true;
+    }
   }
 
   RecipeTypeEnum selectEnum(int index) {
@@ -107,20 +114,19 @@ class HomeController extends GetxController {
       case RecipeTypeEnum.all:
         return fetchRecipes(isRefresh: isRefresh);
       case RecipeTypeEnum.cakes:
-        return fetchRecipesByCategory(
-            isRefresh: isRefresh, category: 'bolinho');
+        return fetchRecipesByCategory(isRefresh: isRefresh, category: 'Bolos');
       case RecipeTypeEnum.meat:
-        return fetchRecipesByCategory(isRefresh: isRefresh, category: 'carnes');
+        return fetchRecipesByCategory(isRefresh: isRefresh, category: 'Carnes');
       case RecipeTypeEnum.sweet:
-        return fetchRecipesByCategory(isRefresh: isRefresh, category: 'doces');
+        return fetchRecipesByCategory(isRefresh: isRefresh, category: 'Doces');
       case RecipeTypeEnum.pasta:
-        return fetchRecipesByCategory(isRefresh: isRefresh, category: 'massar');
+        return fetchRecipesByCategory(isRefresh: isRefresh, category: 'Massar');
       case RecipeTypeEnum.desserts:
         return fetchRecipesByCategory(
-            isRefresh: isRefresh, category: 'sobremesas');
+            isRefresh: isRefresh, category: 'Sobremesas');
       case RecipeTypeEnum.spanish:
         return fetchRecipesByCategory(
-            isRefresh: isRefresh, category: 'espanhola');
+            isRefresh: isRefresh, category: 'Espanhola');
       default:
         return fetchRecipes(isRefresh: isRefresh);
     }

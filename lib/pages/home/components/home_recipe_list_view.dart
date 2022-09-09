@@ -24,9 +24,9 @@ class HomeRecipeListView extends GetView<HomeController> {
         onLoading: () async {
           final result = await controller.getListByFoodType();
           if (result == true) {
-            controller.refreshController.refreshCompleted();
+            controller.refreshController.loadComplete();
           } else {
-            controller.refreshController.refreshFailed();
+            controller.refreshController.loadFailed();
           }
         },
         child: ListView.builder(
@@ -52,6 +52,7 @@ class HomeRecipeListView extends GetView<HomeController> {
                         'preparation_time': list.preparationTime,
                         'rating': list.rating,
                         'categories': list.category,
+                        'page': 'home',
                       },
                     );
                   },

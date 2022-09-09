@@ -59,6 +59,7 @@ class FavoritePage extends StatelessWidget {
                             'preparation_time': list.preparationTime,
                             'rating': list.rating,
                             'categories': list.category,
+                            'page': 'favorite',
                           },
                         );
                       },
@@ -67,7 +68,7 @@ class FavoritePage extends StatelessWidget {
                         suffix: GestureDetector(
                           onTap: () {
                             showCustomDialog(context, onConfirmButtonTap: () {
-                              controller.deleteFavorite(list.id);
+                              controller.deleteFavorite(list.id!);
                               Get.back();
                             });
                           },

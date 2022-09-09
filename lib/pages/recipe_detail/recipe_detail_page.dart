@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/components/app_button.dart';
 
 import 'package:food_recipe_app/components/favorite_button.dart';
 import 'package:food_recipe_app/pages/recipe_detail/components/ingridients_list_view.dart';
@@ -49,7 +50,7 @@ class RecipeDetailPage extends StatelessWidget {
         ),
         body: SafeArea(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width * .5,
@@ -65,7 +66,13 @@ class RecipeDetailPage extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(controller.description),
+                child: Text(
+                  controller.description,
+                  style: const TextStyle(
+                    fontSize: 16,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width * .5,
@@ -82,7 +89,12 @@ class RecipeDetailPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                    '${controller.preparationTime.hour} horas e ${controller.preparationTime.minute} minutos'),
+                  '${controller.preparationTime.hour} horas e ${controller.preparationTime.minute} minutos',
+                  style: const TextStyle(
+                    fontSize: 16,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
               const SizedBox(
                 height: 8,
@@ -128,7 +140,28 @@ class RecipeDetailPage extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
+              Obx(() {
+                return Visibility(
+                  visible: controller.isVisible.value,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: 16,
+                      left: 32,
+                      right: 32,
+                      top: 16,
+                    ),
+                    child: AppButton(
+                      height: 50,
+                      label: 'Compartilhe sua receita',
+                      onTap: () {
+                        controller.postRecipe();
+                      },
+                      margin: EdgeInsets.zero,
+                    ),
+                  ),
+                );
+              })
             ],
           ),
         ),

@@ -24,8 +24,9 @@ class HomeSelectMovieTypeBar extends GetView<HomeController> {
                     controller.changeList(enumValue: RecipeTypeEnum.all);
                     controller.getListByFoodType(isRefresh: true);
                   },
-                  isSelected:
-                      controller.checkActiveList(enumValue: RecipeTypeEnum.all),
+                  isSelected: controller
+                      .checkActiveList(enumValue: RecipeTypeEnum.all)
+                      .value,
                   height: 50,
                   width: 140,
                 );
@@ -38,7 +39,8 @@ class HomeSelectMovieTypeBar extends GetView<HomeController> {
                     controller.changeList(enumValue: listEnum);
                     controller.getListByFoodType(isRefresh: true);
                   },
-                  isSelected: controller.checkActiveList(enumValue: listEnum),
+                  isSelected:
+                      controller.checkActiveList(enumValue: listEnum).value,
                   height: 50,
                   width: 140,
                 );

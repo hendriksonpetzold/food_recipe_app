@@ -38,7 +38,6 @@ class CustomDialog extends Dialog {
                         onTap: () {
                           Get.back();
                         },
-                        isSelected: RxBool(true),
                         margin: EdgeInsets.zero,
                       ),
                     ),
@@ -50,7 +49,6 @@ class CustomDialog extends Dialog {
                         height: 40,
                         label: 'Confirmar',
                         onTap: onConfirmButtonTap,
-                        isSelected: RxBool(true),
                         margin: EdgeInsets.zero,
                       ),
                     ),

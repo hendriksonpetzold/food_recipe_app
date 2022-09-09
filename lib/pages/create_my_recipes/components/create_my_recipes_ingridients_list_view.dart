@@ -29,9 +29,11 @@ class CreateMyRecipesIngridientsListView
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  list,
-                  style: const TextStyle(fontSize: 13),
+                Expanded(
+                  child: Text(
+                    list,
+                    style: const TextStyle(fontSize: 13),
+                  ),
                 ),
                 GestureDetector(
                   onTap: () {

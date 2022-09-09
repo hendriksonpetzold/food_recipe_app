@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/style/app_colors.dart';
-import 'package:get/get.dart';
 
 class AppButton extends StatelessWidget {
   final String label;
   final void Function()? onTap;
-  final RxBool isSelected;
+  final bool isSelected;
   final double width;
   final double height;
   final EdgeInsets margin;
@@ -14,7 +13,7 @@ class AppButton extends StatelessWidget {
     Key? key,
     required this.label,
     required this.onTap,
-    required this.isSelected,
+    this.isSelected = true,
     this.width = double.infinity,
     this.height = 60,
     this.margin = const EdgeInsets.only(right: 16),
@@ -30,14 +29,14 @@ class AppButton extends StatelessWidget {
         height: height,
         margin: margin,
         decoration: BoxDecoration(
-          color: isSelected.value ? AppColors.accentColor : Colors.white,
+          color: isSelected ? AppColors.accentColor : Colors.white,
           borderRadius: BorderRadius.circular(circularBorder),
         ),
         child: Center(
           child: Text(
             label,
             style: TextStyle(
-              color: isSelected.value ? Colors.white : AppColors.textColor,
+              color: isSelected ? Colors.white : AppColors.textColor,
               fontWeight: FontWeight.bold,
               fontSize: 16,
             ),

@@ -46,5 +46,6 @@ class CacheInterceptors implements InterceptorsWrapper {
             .resolve(Response(requestOptions: err.requestOptions, data: data));
       }
     }
+    handler.next(err);
   }
 }
