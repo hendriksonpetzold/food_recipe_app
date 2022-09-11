@@ -7,6 +7,7 @@ class CreateMyRecipesTextFormField extends StatelessWidget {
   final void Function(String)? onFieldSubmitted;
   final String? Function(String?)? validator;
   final int? maxLines;
+  final TextInputType? keyboardType;
   const CreateMyRecipesTextFormField({
     Key? key,
     required this.label,
@@ -15,11 +16,13 @@ class CreateMyRecipesTextFormField extends StatelessWidget {
     this.onFieldSubmitted,
     this.validator,
     this.maxLines = 1,
+    this.keyboardType,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: keyboardType,
       onFieldSubmitted: onFieldSubmitted,
       controller: controller,
       validator: validator,

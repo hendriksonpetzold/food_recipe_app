@@ -7,6 +7,7 @@ import 'package:food_recipe_app/pages/create_my_recipes/components/create_my_rec
 import 'package:food_recipe_app/pages/create_my_recipes/components/create_my_recipes_ingridients_list_view.dart';
 import 'package:food_recipe_app/pages/create_my_recipes/components/create_my_recipes_text_form_field.dart';
 import 'package:food_recipe_app/repository/repository.dart';
+import 'package:food_recipe_app/style/app_colors.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
@@ -123,6 +124,12 @@ class CreateMyRecipesController extends GetxController {
                   controller: preparationModeEditingController,
                   label: 'Modo de preparo',
                   maxLines: null,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Coloque o modo de preparo';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 16,
@@ -130,6 +137,13 @@ class CreateMyRecipesController extends GetxController {
                 CreateMyRecipesTextFormField(
                   controller: preparationTimeEditingController,
                   label: 'Tempo para preparo(em minutos)',
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Coloque o tempo de preparo';
+                    }
+                    return null;
+                  },
                 ),
               ],
             ),
@@ -181,28 +195,123 @@ class CreateMyRecipesController extends GetxController {
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Nome da receita: ${nameEditingController.text}'),
+              RichText(
+                text: TextSpan(
+                  style: const TextStyle(
+                    color: AppColors.textColor,
+                    fontSize: 16,
+                  ),
+                  children: [
+                    const TextSpan(
+                      text: 'Nome da receita: ',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(text: nameEditingController.text),
+                  ],
+                ),
+              ),
               const SizedBox(
                 height: 8,
               ),
-              Text('Ingredientes: ${ingridients.join(',')}'),
+              RichText(
+                text: TextSpan(
+                  style: const TextStyle(
+                    color: AppColors.textColor,
+                    fontSize: 16,
+                  ),
+                  children: [
+                    const TextSpan(
+                      text: 'Ingredientes: ',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(text: ingridients.join(',')),
+                  ],
+                ),
+              ),
               const SizedBox(
                 height: 8,
               ),
-              Text('Modo de preparo: ${preparationModeEditingController.text}'),
+              RichText(
+                text: TextSpan(
+                  style: const TextStyle(
+                    color: AppColors.textColor,
+                    fontSize: 16,
+                  ),
+                  children: [
+                    const TextSpan(
+                      text: 'Modo de preparo: ',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(text: preparationModeEditingController.text),
+                  ],
+                ),
+              ),
               const SizedBox(
                 height: 8,
               ),
-              Text(
-                  'Tempo de preparo: ${preparationTimeEditingController.text}'),
+              RichText(
+                text: TextSpan(
+                  style: const TextStyle(
+                    color: AppColors.textColor,
+                    fontSize: 16,
+                  ),
+                  children: [
+                    const TextSpan(
+                      text: 'Tempo de preparo: ',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(text: preparationTimeEditingController.text),
+                  ],
+                ),
+              ),
               const SizedBox(
                 height: 8,
               ),
-              Text('Categoria: ${categoryNames.join(',')}'),
+              RichText(
+                text: TextSpan(
+                  style: const TextStyle(
+                    color: AppColors.textColor,
+                    fontSize: 16,
+                  ),
+                  children: [
+                    const TextSpan(
+                      text: 'Categoria: ',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(text: categoryNames.join(',')),
+                  ],
+                ),
+              ),
               const SizedBox(
                 height: 8,
               ),
-              Text('Descrição: ${descriptionEditingController.text}'),
+              RichText(
+                text: TextSpan(
+                  style: const TextStyle(
+                    color: AppColors.textColor,
+                    fontSize: 16,
+                  ),
+                  children: [
+                    const TextSpan(
+                      text: 'Descrição: ',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(text: descriptionEditingController.text),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

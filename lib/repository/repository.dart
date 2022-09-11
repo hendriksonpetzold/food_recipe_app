@@ -15,7 +15,7 @@ class Repository {
   }
 
   Future<List<RecipeModel>> findRecipes({required int page}) async {
-    final response = await dio.get('$_url/recipe?page_id=$page&page_size=5');
+    final response = await dio.get('$_url/recipe?page_id=$page&page_size=10');
 
     final result = response.data as List;
     return result.map<RecipeModel>((e) {
@@ -25,7 +25,7 @@ class Repository {
 
   Future<List<RecipeModel>> findRecipesByCategory(
       {required int page, required List<String> categories}) async {
-    final response = await dio.get('$_url/recipe/categories/?page_size=5',
+    final response = await dio.get('$_url/recipe/categories/?page_size=10',
         queryParameters: {'page_id': page, 'categories': categories});
     final result = response.data as List;
     return result.map<RecipeModel>((e) {
