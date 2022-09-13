@@ -4,8 +4,8 @@ import 'package:food_recipe_app/enums/recipe_type_enum.dart';
 import 'package:food_recipe_app/pages/home/home_controller.dart';
 import 'package:get/get.dart';
 
-class HomeSelectMovieTypeBar extends GetView<HomeController> {
-  const HomeSelectMovieTypeBar({Key? key}) : super(key: key);
+class HomeSelectRecipeTypeBar extends GetView<HomeController> {
+  const HomeSelectRecipeTypeBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

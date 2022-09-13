@@ -50,7 +50,7 @@ class HomePage extends StatelessWidget {
             SizedBox(
               height: 16,
             ),
-            HomeSelectMovieTypeBar(),
+            HomeSelectRecipeTypeBar(),
             SizedBox(
               height: 16,
             ),
